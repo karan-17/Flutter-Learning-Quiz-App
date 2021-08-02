@@ -12,17 +12,17 @@ void main() => runApp(MyApp());
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MyAppState(); //connected the 2 classes Myapp and MyAppState
+    return _MyAppState(); //connected the 2 classes Myapp and MyAppState
   }
-}
-class MyAppState extends State<MyApp> {
-  var questionIndex = 0;
+}//private class conversion syntax "_MyAppState" leading underscore
+class _MyAppState extends State<MyApp> {
+  var _questionIndex = 0;
 
-  void answerQuestion() {
+  void _answerQuestion() {
     setState(() {
-      questionIndex +=1;
+      _questionIndex +=1;
     });
-    print(questionIndex);
+    print(_questionIndex);
   }
   @override
   Widget build(BuildContext context) {
@@ -37,8 +37,8 @@ class MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text(questions[questionIndex]),
-            ElevatedButton(onPressed: answerQuestion,
+            Text(questions[_questionIndex]),
+            ElevatedButton(onPressed: _answerQuestion,
               child: Text('Answer 1'),),
             ElevatedButton(onPressed: ()=> print('Answer 2 chosen'),//anonymous function
                 child: Text('Answer 2')),
@@ -53,3 +53,4 @@ class MyAppState extends State<MyApp> {
     );
   }
   }
+  
