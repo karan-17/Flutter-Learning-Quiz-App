@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/question.dart';
-import 'package:quiz_app/answer.dart';
+import 'package:quiz_app/quiz.dart';
+import 'package:quiz_app/result.dart';
 
 void main() => runApp(MyApp());
 //class Person{
@@ -19,8 +19,10 @@ class MyApp extends StatefulWidget {
 } //private class conversion syntax "_MyAppState" leading underscore
 
 class _MyAppState extends State<MyApp> {
-  static const questions = [// or can do final questions = const[]
-    {//Map is a collection of key-value combo
+  static const _questions = [
+    // or can do final questions = const[]
+    {
+      //Map is a collection of key-value combo
       //Map is a separate class in dart, here shorthand used for map "{...}"
       'questionText': 'What\'s my favourite colour?',
       'answers': ['Black', 'Red', 'Green', 'White'],
@@ -43,33 +45,23 @@ class _MyAppState extends State<MyApp> {
       _questionIndex += 1;
     });
     print(_questionIndex);
-    if(_questionIndex < questions.length){
+    if (_questionIndex < _questions.length) {
       print('We have more questions!');
-    }
-    else{
+    } else {
       print('No more question!');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('Who Am I?'),
         ),
-        body: _questionIndex < questions.length ? Column(
-          children: [
-            Question(questions[_questionIndex]['questionText'],
-            ),
-            ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
-              return Answer(_answerQuestion, answer);
-            }).toList()//executes a function on every element of the list
-          ],// ... take a list, pull all values out of list, add them to surrounding list as individual values
-          //adding values to the lists of list
-        )
-            : Center(child: Text('You Did It!!'),),
+        body: _questionIndex < _questions.length
+            ? Quiz(answerQuestion: _answerQuestion, questionIndex: _questionIndex, questions: _questions)
+            : Result(),
       ),
       theme: ThemeData.dark(),
     );
