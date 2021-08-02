@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:quiz_app/question.dart';
 void main() => runApp(MyApp());
 //class Person{
 // String name;
@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text(questions[_questionIndex]),
+            Question(questions[_questionIndex]),
             ElevatedButton(onPressed: _answerQuestion,
               child: Text('Answer 1'),),
             ElevatedButton(onPressed: ()=> print('Answer 2 chosen'),//anonymous function
@@ -53,4 +53,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
   }
-  
+
